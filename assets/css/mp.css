@@ -201,7 +201,6 @@ header h2 {
     cursor: pointer;
 }
 
-/* Ẩn thumb mặc định */
 .progress::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -211,7 +210,6 @@ header h2 {
     border-radius: 50%;
     cursor: pointer;
 }
-
 
 
 /* Khu vực Lyrics */
