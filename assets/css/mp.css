@@ -110,9 +110,89 @@ header h2 {
 }
 
 /* PLAYLIST */
+
+
+/* Khi bài hát đang active, đổi màu biểu tượng */
+.song.active .option {
+    color: #fff;
+}
+
+.option {
+    cursor: pointer;
+    padding: 16px 8px;
+    color: #999;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu {
+    position: absolute;
+    right: 0;
+    background: #fff;
+    list-style: none;
+    padding: 8px 0;
+    margin-top: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    min-width: 180px;
+    z-index: 100;
+    
+    /* Dịch menu xuống mà không làm nó tràn lên trên */
+    transform: translateY(-20px);
+}
+
+.option:hover .menu {
+    display: block;
+}
+
+.menu li {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.menu li i {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #999;
+}
+
+.menu li:hover {
+    background: #f1f1f1;
+}
+
+/* Tô màu đỏ cho icon tim khi bài hát yêu thích */
+.song.favorite .btn-favorite i {
+    color: red;
+}
+
+/* Đánh dấu bài hát yêu thích */
+.song.favorite {
+    background: rgba(255, 0, 0, 0.2); /* Màu nền nhẹ nhàng */
+    border-left: 4px solid red; /* Viền bên trái màu đỏ */
+}
+
+.song.favorite:hover {
+    background: rgba(255, 0, 0, 0.3); /* Màu hover đậm hơn */
+}
+
+/* Hiển thị icon ❤️ đỏ trong menu khi đã yêu thích */
+.menu .btn-favorite i.active {
+    color: red;
+}
+
+
 .playlist {
     margin-top: 560px;
-    padding: 12px;
+    padding: 18px 12px;
+    max-height: 100vh; /* Hoặc chiều cao bạn muốn */
 }
 
 .song {
@@ -176,6 +256,10 @@ header h2 {
     padding: 10px 16px;
     font-size: 14px;
     color: #222;
+}
+
+.start {
+    width: 25px;
 }
 
 .start,
