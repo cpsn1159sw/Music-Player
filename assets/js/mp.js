@@ -33,6 +33,7 @@ const cdThumbAnimate = cdThumb.animate(
     iterations: Infinity,
   }
 );
+cdThumbAnimate.pause();
 
 function formatTime(value) {
   const minutes = Math.floor(value / 60);
@@ -265,13 +266,11 @@ const app = {
     audio.onplay = function () {
       app.isPlaying = true;
       player.classList.add("playing");
-      _this.setConfig("isPlaying", _this.isPlaying);
     };
     audio.onpause = function () {
       app.isPlaying = false;
       app.isSeeking = true;
       player.classList.remove("playing");
-      _this.setConfig("isPlaying", _this.isPlaying);
     };
 
     // Next audio player
@@ -366,15 +365,6 @@ const app = {
     }
     //* end progress
 
-    if (this.config.currentTime) {
-      audio.currentTime = this.config.currentTime;
-    }
-    if (this.config.isPlaying) {
-      audio.play();
-      cdThumbAnimate.play();
-    } else {
-      cdThumbAnimate.pause();
-    }
     // Lắng nghe hành vi click vào playlist
     // Listen to playlist clicks
     playList.addEventListener("click", function (e) {
@@ -542,6 +532,15 @@ const app = {
     if (this.currentIndex === undefined || this.currentIndex < 0) {
       this.currentIndex = 0; // Mặc định về bài đầu tiên
     }
+    if (this.isRandom === undefined) {
+      this.isRandom = false; // Mặc định về bài đầu tiên
+    }
+    if (this.isRepeat === undefined) {
+      this.isRepeat = false; // Mặc định về bài đầu tiên
+    }
+    if (this.config.currentTime) {
+      audio.currentTime = this.config.currentTime;
+    }
     
     heading.textContent = this.currentSong.name;
     cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
@@ -561,7 +560,7 @@ const app = {
     const songs = $$(".song");
     songs.forEach((list) => list.classList.remove("active"));
     songs[this.currentIndex]?.classList.add("active");
-
+    
     this.scrollToSong();
   },
 
