@@ -213,7 +213,7 @@ const app = {
 
   render: function () {
     const htmls = this.songs.map((song, index) => {
-      return `<div class="song ${this.config.favoriteSongs.includes(index) ? "favorite" : ""}" data-index="${index}">
+    return `<div class="song ${Array.isArray(this.config.favoriteSongs) && this.config.favoriteSongs.includes(index) ? "favorite" : ""}" data-index="${index}">
                 <div class="thumb"
                     style="background-image: url('${song.image}')">
                 </div>
@@ -371,6 +371,9 @@ const app = {
     }
     if (this.config.isPlaying) {
       audio.play();
+      cdThumbAnimate.play();
+    } else {
+      cdThumbAnimate.pause();
     }
     // Lắng nghe hành vi click vào playlist
     // Listen to playlist clicks
@@ -536,6 +539,10 @@ const app = {
   },
 
   loadCurrentSong: function () {
+    if (this.currentIndex === undefined || this.currentIndex < 0) {
+      this.currentIndex = 0; // Mặc định về bài đầu tiên
+    }
+    
     heading.textContent = this.currentSong.name;
     cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
     audio.src = this.currentSong.path;
